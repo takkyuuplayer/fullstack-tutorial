@@ -26,7 +26,14 @@ export default function Login() {
     {
       onCompleted({ login }) {
         localStorage.setItem("token", login as string);
-        // client.writeData({ data: { isLoggedIn: true } });
+        client.writeQuery({
+          query: gql`
+            query {
+              isLoggedIn
+            }
+          `,
+          data: { isLoggedIn: true },
+        });
       },
     }
   );
